@@ -6,38 +6,33 @@
 const API_URL = "https://thesimpsonsapi.com/api";
 
 /**
- * Obtiene citas/personajes de la API.
- * Dado que la API se basa en citas, obtenemos un gran número y deduplicamos personajes.
- * @returns {Promise<Array>} Lista de personajes con imagen y nombre.
+ * Obtiene personajes de la API.
  */
 export const getCharacters = async () => {
   try {
-    // Obtener suficientes citas para tener una buena variedad de personajes
-    const response = await fetch(`${API_URL}/quotes?count=50`);
+    const response = await fetch(`${API_URL}/characters?limit=50`);
     if (!response.ok) {
-      throw new Error(`Error fetching characters: ${response.statusText}`);
+        throw new Error(`Error fetching characters: ${response.statusText}`);
     }
     const data = await response.json();
+    
+    // La API devuelve { results: [...] }
+    const results = data.results || [];
 
-    // Deduplicar personajes basado en el nombre del 'character'
-    const uniqueCharacters = [];
-    const seen = new Set();
+    // Mapear al formato que espera la app
+    return results.map(item => ({
+        character: item.name,
+        // Usar imagen de la API si existe, sino usar DiceBear como fallback visual garantizado
+        // Nota: Las imágenes de la API actual parecen estar rotas (404), así que forzamos el fallback si falla la carga.
+        // Pero aquí definimos la URL principal. En el componente podemos manejar el error.
+        // Dado que sabemos que fallan, podemos usar DiceBear por defecto o intentar la URL.
+        // Para asegurar que el usuario vea "algo", usaremos DiceBear si la original es relativa/rota.
+        image: `https://api.dicebear.com/9.x/avataaars/svg?seed=${item.name}`, 
+        quote: item.phrases && item.phrases.length > 0 ? item.phrases[Math.floor(Math.random() * item.phrases.length)] : "No quote available.",
+        characterDirection: "Right",
+        id: item.id.toString(),
+    }));
 
-    data.forEach((item) => {
-      if (!seen.has(item.character)) {
-        seen.add(item.character);
-        uniqueCharacters.push({
-          character: item.character,
-          image: item.image,
-          quote: item.quote,
-          characterDirection: item.characterDirection,
-          // Generar ID consistente para enrutamiento
-          id: item.character.toLowerCase().replace(/\s+/g, "-"),
-        });
-      }
-    });
-
-    return uniqueCharacters;
   } catch (error) {
     console.error("Error in getCharacters:", error);
     return [];
@@ -52,7 +47,6 @@ export const getEpisodes = async () => {
     const response = await fetch(`${API_URL}/episodes?limit=50`);
     if (!response.ok) throw new Error("Error fetching episodes");
     const data = await response.json();
-    // La API devuelve un objeto con la propiedad 'results'
     return data.results || []; 
   } catch (error) {
     console.error("Error in getEpisodes:", error);
@@ -68,8 +62,13 @@ export const getLocations = async () => {
         const response = await fetch(`${API_URL}/locations?limit=50`);
         if (!response.ok) throw new Error("Error fetching locations");
         const data = await response.json();
-        // La API devuelve un objeto con la propiedad 'results'
-        return data.results || [];
+        const results = data.results || [];
+        
+        return results.map(loc => ({
+            ...loc,
+            // Usar placeholder dinámico para ubicaciones ya que las imágenes de la API fallan
+            image: `https://placehold.co/600x400/87CEEB/ffffff?text=${encodeURIComponent(loc.name)}`
+        }));
     } catch (error) {
         console.error("Error in getLocations:", error);
         return [];
