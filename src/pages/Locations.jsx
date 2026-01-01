@@ -1,0 +1,36 @@
+import React, { useEffect } from "react";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import { getLocations } from "../services/simpsonsServices";
+
+/**
+ * Page to display list of Locations.
+ */
+export const Locations = () => {
+    const { store, dispatch } = useGlobalReducer();
+
+    useEffect(() => {
+        if (store.locations.length === 0) {
+            getLocations().then(data => {
+                dispatch({ type: 'set_locations', payload: data });
+            });
+        }
+    }, []);
+
+    return (
+        <div className="container mt-5">
+            <h1 className="text-center mb-4">Locations</h1>
+            <div className="row">
+                {store.locations.map(location => (
+                    <div key={location.id} className="col-md-4 mb-3">
+                        <div className="card text-center">
+                            <div className="card-body">
+                                <h5 className="card-title">{location.name}</h5>
+                                <p className="card-text text-muted">{location.type}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};

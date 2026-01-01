@@ -1,0 +1,33 @@
+body {
+  background-color: #f0f8ff; /* AliceBlue usually looks nice and clean, similar to reference */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  border-radius: 15px; /* Rounded corners detailed in reference */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.jumbotron {
+  background-color: white;
+}
+
+/* Ensure buttons are properly spaced */
+.btn {
+  border-radius: 20px;
+}
+
+h1.text-warning {
+  color: #ffde00 !important; /* Simpsons Yellow */
+  -webkit-text-stroke: 1px #000; /* Black outline */
+}
