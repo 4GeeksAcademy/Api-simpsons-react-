@@ -39,12 +39,12 @@ export const CharacterCard = ({ character }) => {
                 <p className="card-text font-italic">"{character.quote}"</p>
 
                 <div className="d-flex justify-content-between mt-auto">
-                    <Link to={`/character/${character.id}`} className="btn btn-outline-primary">
+                    <Link to={`/character/${character.id}`} className="btn btn-outline-primary mr-2">
                         ¡Ver más!
                     </Link>
                     <div>
                          <button 
-                            className={`btn btn-outline-warning mr-2 ${isFavorite ? "active" : ""}`}
+                            className={`btn btn-outline-warning mx-2 ${isFavorite ? "active" : ""}`}
                             onClick={() => {
                                 if (isFavorite) {
                                     dispatch({ type: "remove_favorite", payload: character });
@@ -56,7 +56,7 @@ export const CharacterCard = ({ character }) => {
                             <i className={`${isFavorite ? "fas" : "far"} fa-heart`}></i>
                         </button>
                          <button 
-                            className={`btn btn-outline-success ${isLiked ? "active" : ""}`}
+                            className={`btn btn-outline-success mx-2 ${isLiked ? "active" : ""}`}
                             onClick={() => dispatch({ type: "toggle_like", payload: character.id })}
                         >
                              <i className={`${isLiked ? "fas" : "far"} fa-thumbs-up`}></i>

@@ -22,15 +22,20 @@ export const Locations = () => {
             <div className="row">
                 {store.locations.map(location => (
                     <div key={location.id} className="col-md-4 mb-3">
-                        <div className="card text-center h-100">
-                             {/* Usar la imagen mapeada en el servicio (Placeholder o API) */}
-                            <img src={location.image} 
-                                 className="card-img-top" 
-                                 alt={location.name}
-                                 style={{maxHeight: '150px', objectFit: 'cover'}}
-                            />
+                        <div className="card text-center h-100 shadow-sm border-0">
+                             {/* Reemplazo de imagen por div estilizado para uniformidad de texto */}
+                            <div className="d-flex align-items-center justify-content-center bg-info text-white p-3" 
+                                 style={{
+                                     height: '150px', 
+                                     width: '100%',
+                                     fontSize: '1.2rem',
+                                     fontWeight: 'bold',
+                                     textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
+                                 }}>
+                                {location.name}
+                            </div>
                             <div className="card-body">
-                                <h5 className="card-title">{location.name}</h5>
+                                <h5 className="card-title font-weight-bold">{location.name}</h5>
                                 <p className="card-text text-muted">{location.use}</p> {/* API usa 'use' */}
                                 <small className="text-secondary">{location.town}</small>
                             </div>

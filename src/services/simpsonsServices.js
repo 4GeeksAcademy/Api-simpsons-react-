@@ -19,15 +19,20 @@ export const getCharacters = async () => {
     // La API devuelve { results: [...] }
     const results = data.results || [];
 
+    // Mapeo de personajes a sus imágenes locales
+    const characterImages = {
+        "Homer Simpson": "/assets/homer.png",
+        "Marge Simpson": "/assets/marge.png",
+        "Bart Simpson": "/assets/bart.png",
+        "Lisa Simpson": "/assets/lisa.png",
+        "Maggie Simpson": "/assets/maggie.png"
+    };
+
     // Mapear al formato que espera la app
     return results.map(item => ({
         character: item.name,
-        // Usar imagen de la API si existe, sino usar DiceBear como fallback visual garantizado
-        // Nota: Las imágenes de la API actual parecen estar rotas (404), así que forzamos el fallback si falla la carga.
-        // Pero aquí definimos la URL principal. En el componente podemos manejar el error.
-        // Dado que sabemos que fallan, podemos usar DiceBear por defecto o intentar la URL.
-        // Para asegurar que el usuario vea "algo", usaremos DiceBear si la original es relativa/rota.
-        image: `https://api.dicebear.com/9.x/avataaars/svg?seed=${item.name}`, 
+        // Usar imagen local si existe, sino generic.png
+        image: characterImages[item.name] || "/assets/generic.png", 
         quote: item.phrases && item.phrases.length > 0 ? item.phrases[Math.floor(Math.random() * item.phrases.length)] : "No quote available.",
         characterDirection: "Right",
         id: item.id.toString(),
