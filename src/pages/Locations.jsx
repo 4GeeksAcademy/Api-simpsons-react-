@@ -3,7 +3,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getLocations } from "../services/simpsonsServices";
 
 /**
- * Page to display list of Locations.
+ * Página para mostrar la lista de Ubicaciones.
  */
 export const Locations = () => {
     const { store, dispatch } = useGlobalReducer();
@@ -22,10 +22,20 @@ export const Locations = () => {
             <div className="row">
                 {store.locations.map(location => (
                     <div key={location.id} className="col-md-4 mb-3">
-                        <div className="card text-center">
+                        <div className="card text-center h-100">
+                             {/* Algunos items tienen imagen, podríamos usarla si existe */}
+                            {location.image_path && (
+                                <img src={`https://static.wikia.nocookie.net/simpsons/images/${location.image_path}`} 
+                                     className="card-img-top" 
+                                     alt={location.name}
+                                     onError={(e) => e.target.style.display = 'none'} // Ocultar si falla
+                                     style={{maxHeight: '150px', objectFit: 'contain', marginTop: '10px'}}
+                                />
+                            )}
                             <div className="card-body">
                                 <h5 className="card-title">{location.name}</h5>
-                                <p className="card-text text-muted">{location.type}</p>
+                                <p className="card-text text-muted">{location.use}</p> {/* API usa 'use' */}
+                                <small className="text-secondary">{location.town}</small>
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getEpisodes } from "../services/simpsonsServices";
 
 /**
- * Page to display list of Episodes.
+ * Página para mostrar la lista de Episodios.
  */
 export const Episodes = () => {
     const { store, dispatch } = useGlobalReducer();
@@ -23,10 +23,10 @@ export const Episodes = () => {
                 {store.episodes.map(episode => (
                     <li key={episode.id} className="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 className="mb-1">{episode.title}</h5>
-                            <small>S{episode.season} E{episode.episode}</small>
+                            <h5 className="mb-1">{episode.name}</h5> {/* API usa 'name' no 'title' */}
+                            <small>T{episode.season} E{episode.episode_number}</small> {/* T=Temporada, E=Episodio */}
                         </div>
-                        <span className="badge badge-primary badge-pill">{episode.airDate}</span>
+                        <span className="badge badge-primary badge-pill">{episode.airdate}</span>
                     </li>
                 ))}
             </ul>

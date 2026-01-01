@@ -45,75 +45,33 @@ export const getCharacters = async () => {
 };
 
 /**
- * Datos simulados (Mock) para Episodios dado que la API no los proporciona.
+ * Obtiene lista de episodios de la API.
  */
 export const getEpisodes = async () => {
-  // Simulando llamada a API
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          id: 1,
-          title: "Simpsons Roasting on an Open Fire",
-          season: 1,
-          episode: 1,
-          airJava: "1989-12-17",
-        },
-        {
-          id: 2,
-          title: "Bart the Genius",
-          season: 1,
-          episode: 2,
-          airDate: "1990-01-14",
-        },
-        {
-          id: 3,
-          title: "Homer's Odyssey",
-          season: 1,
-          episode: 3,
-          airDate: "1990-01-21",
-        },
-        {
-          id: 4,
-          title: "There's No Disgrace Like Home",
-          season: 1,
-          episode: 4,
-          airDate: "1990-01-28",
-        },
-        {
-          id: 5,
-          title: "Bart the General",
-          season: 1,
-          episode: 5,
-          airDate: "1990-02-04",
-        },
-        {
-          id: 6,
-          title: "Moaning Lisa",
-          season: 1,
-          episode: 6,
-          airDate: "1990-02-11",
-        },
-      ]);
-    }, 500);
-  });
+  try {
+    const response = await fetch(`${API_URL}/episodes?limit=50`);
+    if (!response.ok) throw new Error("Error fetching episodes");
+    const data = await response.json();
+    // La API devuelve un objeto con la propiedad 'results'
+    return data.results || []; 
+  } catch (error) {
+    console.error("Error in getEpisodes:", error);
+    return [];
+  }
 };
 
 /**
- * Datos simulados (Mock) para Ubicaciones dado que la API no los proporciona.
+ * Obtiene lista de ubicaciones de la API.
  */
 export const getLocations = async () => {
-  // Simulando llamada a API
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        { id: 1, name: "Springfield Nuclear Power Plant", type: "Lugar de Trabajo" },
-        { id: 2, name: "Moe's Tavern", type: "Bar" },
-        { id: 3, name: "Springfield Elementary School", type: "Escuela" },
-        { id: 4, name: "742 Evergreen Terrace", type: "Casa" },
-        { id: 5, name: "Kwik-E-Mart", type: "Tienda de Conveniencia" },
-        { id: 6, name: "Krusty Burger", type: "Restaurante" },
-      ]);
-    }, 500);
-  });
+    try {
+        const response = await fetch(`${API_URL}/locations?limit=50`);
+        if (!response.ok) throw new Error("Error fetching locations");
+        const data = await response.json();
+        // La API devuelve un objeto con la propiedad 'results'
+        return data.results || [];
+    } catch (error) {
+        console.error("Error in getLocations:", error);
+        return [];
+    }
 };
