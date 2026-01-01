@@ -18,7 +18,7 @@ export const Locations = () => {
 
     return (
         <div className="container mt-5">
-            <h1 className="text-center mb-4">Locations</h1>
+            <h1 className="text-center mb-4">Ubicaciones</h1>
             <div className="row">
                 {store.locations.map(location => (
                     <div key={location.id} className="col-md-4 mb-3">

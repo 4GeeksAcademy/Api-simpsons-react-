@@ -28,19 +28,19 @@ export const CharacterCard = ({ character }) => {
             
             <div className="card-body text-center">
                 <h5 className="card-title">{character.character}</h5>
-                {/* Mocking Job/Status as it often comes with character data or we assume */}
-                <p className="card-text text-muted mb-2">Character</p>
+                {/* Simulando Trabajo/Estado ya que a menudo viene con los datos del personaje o lo asumimos */}
+                <p className="card-text text-muted mb-2">Personaje</p>
                 
                 <div className="d-flex justify-content-center align-items-center mb-3">
-                   <span className="badge badge-pill badge-light border mx-1">Unknown Age</span>
-                   <span className="badge badge-pill badge-success border mx-1">Alive</span>
+                   <span className="badge badge-pill badge-light border mx-1">Edad Desconocida</span>
+                   <span className="badge badge-pill badge-success border mx-1">Vivo</span>
                 </div>
                 
                 <p className="card-text font-italic">"{character.quote}"</p>
 
                 <div className="d-flex justify-content-between mt-auto">
                     <Link to={`/character/${character.id}`} className="btn btn-outline-primary">
-                        Learn more!
+                        ¡Ver más!
                     </Link>
                     <div>
                          <button 

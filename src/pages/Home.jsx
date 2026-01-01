@@ -18,7 +18,7 @@ export const Home = () => {
   return (
     <div className="container mt-5">
       <h1 className="text-center mb-5 text-warning" style={{ textShadow: "2px 2px #000" }}>
-          The Simpsons Characters
+          Personajes de Los Simpsons
       </h1>
       <div className="row">
         {store.characters.length > 0 ? (

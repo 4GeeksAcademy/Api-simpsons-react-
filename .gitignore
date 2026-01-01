@@ -23,3 +23,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Blog de Starwars Reference Files
+Blog de Starwars_files/

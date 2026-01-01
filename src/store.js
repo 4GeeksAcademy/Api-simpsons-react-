@@ -4,8 +4,8 @@ export const initialStore=()=>{
     characters: [],
     episodes: [],
     locations: [],
-    favorites: [], // Global favorites list
-    likes: {}      // Map of character ID -> boolean
+    favorites: [], // Lista global de favoritos
+    likes: {}      // Mapa de ID de personaje -> booleano
   }
 }
 
@@ -27,7 +27,7 @@ export default function storeReducer(store, action = {}) {
         locations: action.payload
       };
     case 'add_favorite':
-      // Prevent duplicates
+      // Prevenir duplicados
       if (store.favorites.some(fav => fav.id === action.payload.id)) return store;
       return {
         ...store,
@@ -39,7 +39,7 @@ export default function storeReducer(store, action = {}) {
         favorites: store.favorites.filter(fav => fav.id !== action.payload.id)
       };
     case 'toggle_like':
-        // Toggle like status for a specific ID
+        // Alternar estado de like para un ID específico
         const currentLikeStatus = store.likes[action.payload] || false;
         return {
             ...store,

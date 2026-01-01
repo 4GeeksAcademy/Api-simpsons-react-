@@ -18,7 +18,7 @@ export const Episodes = () => {
 
     return (
         <div className="container mt-5">
-            <h1 className="text-center mb-4">Episodes</h1>
+            <h1 className="text-center mb-4">Episodios</h1>
             <ul className="list-group">
                 {store.episodes.map(episode => (
                     <li key={episode.id} className="list-group-item d-flex justify-content-between align-items-center">

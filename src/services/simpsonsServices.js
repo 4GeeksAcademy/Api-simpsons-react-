@@ -1,25 +1,25 @@
 /**
- * Service to interact with The Simpsons API.
- * Documentation: https://thesimpsonsapi.com/
+ * Servicio para interactuar con la API de Los Simpsons.
+ * Documentación: https://thesimpsonsapi.com/
  */
 
 const API_URL = "https://thesimpsonsapi.com/api";
 
 /**
- * Fetches quotes/characters from the API.
- * Since the API is quote-based, we fetch a large number and deduplicate characters.
- * @returns {Promise<Array>} List of characters with image and name.
+ * Obtiene citas/personajes de la API.
+ * Dado que la API se basa en citas, obtenemos un gran número y deduplicamos personajes.
+ * @returns {Promise<Array>} Lista de personajes con imagen y nombre.
  */
 export const getCharacters = async () => {
   try {
-    // Fetch enough quotes to get a good variety of characters
+    // Obtener suficientes citas para tener una buena variedad de personajes
     const response = await fetch(`${API_URL}/quotes?count=50`);
     if (!response.ok) {
       throw new Error(`Error fetching characters: ${response.statusText}`);
     }
     const data = await response.json();
 
-    // Deduplicate characters based on 'character' name
+    // Deduplicar personajes basado en el nombre del 'character'
     const uniqueCharacters = [];
     const seen = new Set();
 
@@ -31,7 +31,7 @@ export const getCharacters = async () => {
           image: item.image,
           quote: item.quote,
           characterDirection: item.characterDirection,
-          // Generator consistent ID for routing
+          // Generar ID consistente para enrutamiento
           id: item.character.toLowerCase().replace(/\s+/g, "-"),
         });
       }
@@ -45,10 +45,10 @@ export const getCharacters = async () => {
 };
 
 /**
- * Mock data for Episodes since the API doesn't provide them.
+ * Datos simulados (Mock) para Episodios dado que la API no los proporciona.
  */
 export const getEpisodes = async () => {
-  // Simulating API call
+  // Simulando llamada a API
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
@@ -100,19 +100,19 @@ export const getEpisodes = async () => {
 };
 
 /**
- * Mock data for Locations since the API doesn't provide them.
+ * Datos simulados (Mock) para Ubicaciones dado que la API no los proporciona.
  */
 export const getLocations = async () => {
-  // Simulating API call
+  // Simulando llamada a API
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([
-        { id: 1, name: "Springfield Nuclear Power Plant", type: "Workplace" },
+        { id: 1, name: "Springfield Nuclear Power Plant", type: "Lugar de Trabajo" },
         { id: 2, name: "Moe's Tavern", type: "Bar" },
-        { id: 3, name: "Springfield Elementary School", type: "School" },
-        { id: 4, name: "742 Evergreen Terrace", type: "House" },
-        { id: 5, name: "Kwik-E-Mart", type: "Convenience Store" },
-        { id: 6, name: "Krusty Burger", type: "Restaurant" },
+        { id: 3, name: "Springfield Elementary School", type: "Escuela" },
+        { id: 4, name: "742 Evergreen Terrace", type: "Casa" },
+        { id: 5, name: "Kwik-E-Mart", type: "Tienda de Conveniencia" },
+        { id: 6, name: "Krusty Burger", type: "Restaurante" },
       ]);
     }, 500);
   });

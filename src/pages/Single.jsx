@@ -39,7 +39,7 @@ export const Single = () => {
               </div>
           );
       }
-      return <div className="container mt-5"><h1>Character not found</h1></div>;
+      return <div className="container mt-5"><h1>Personaje no encontrado</h1></div>;
   }
 
   return (
@@ -58,13 +58,13 @@ export const Single = () => {
                  <h1 className="display-4 text-primary">{character.character}</h1>
                  <p className="lead font-italic">"{character.quote}"</p>
                  <hr className="my-4" />
-                 <p><strong>Character Direction:</strong> {character.characterDirection}</p>
-                 <p><strong>Status:</strong> Alive (Assumed)</p>
+                 <p><strong>Dirección:</strong> {character.characterDirection}</p>
+                 <p><strong>Estado:</strong> Vivo (Asumido)</p>
                  
                  <div className="mt-4">
                      <Link to="/">
                         <span className="btn btn-primary btn-lg" role="button">
-                            Back home
+                            Volver al inicio
                         </span>
                      </Link>
                  </div>
