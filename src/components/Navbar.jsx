@@ -14,10 +14,10 @@ export const Navbar = () => {
                 <span className="navbar-brand mb-0 h1">Blog de Los Simpsons</span>
             </Link>
             <div className="ml-auto d-flex align-items-center">
-                <Link to="/episodes" className="btn btn-outline-primary mx-3">Episodios</Link>
-                <Link to="/locations" className="btn btn-outline-success mx-3">Ubicaciones</Link>
+                <Link to="/episodes" className="btn btn-outline-primary mx-2">Episodios</Link>
+                <Link to="/locations" className="btn btn-outline-success mx-2">Ubicaciones</Link>
                 
-                <div className="btn-group">
+                <div className="btn-group mx-2">
                     <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Favoritos <span className="badge badge-light">{favorites.length}</span>
                     </button>
