@@ -16,7 +16,7 @@ export const CharacterCard = ({ character }) => {
     const isLiked = store.likes[character.id] || false;
 
     return (
-        <div className="card shadow-sm h-100" style={{ minWidth: "18rem" }}>
+        <div className="card shadow-sm h-100">
             <div className="text-center p-3">
                  <img 
                     src={character.image} 
@@ -32,8 +32,8 @@ export const CharacterCard = ({ character }) => {
                 <p className="card-text text-muted mb-2">Personaje</p>
                 
                 <div className="d-flex justify-content-center align-items-center mb-3">
-                   <span className="badge badge-pill badge-light border mx-1">Edad Desconocida</span>
-                   <span className="badge badge-pill badge-success border mx-1">Vivo</span>
+                   <span className="badge badge-pill badge-status-custom border mx-1">Edad Desconocida</span>
+                   <span className="badge badge-pill badge-status-custom border mx-1">Vivo</span>
                 </div>
                 
                 <p className="card-text text-truncate" title={character.quote}>"{character.quote}"</p>

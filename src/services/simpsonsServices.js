@@ -19,34 +19,11 @@ export const getCharacters = async () => {
     // La API devuelve { results: [...] }
     const results = data.results || [];
 
-    // Mapeo de personajes a sus imágenes locales (incluyendo nuevos assets)
-    const characterImages = {
-        "Homer Simpson": "/assets/homer.png",
-        "Marge Simpson": "/assets/marge.png",
-        "Bart Simpson": "/assets/bart.png",
-        "Lisa Simpson": "/assets/lisa.png",
-        "Maggie Simpson": "/assets/maggie.png",
-        "Abe Simpson": "/assets/abe.png",
-        "Abraham Simpson": "/assets/abe.png", // Alias posible
-        "Ned Flanders": "/assets/flanders.png",
-        "Montgomery Burns": "/assets/burns.png",
-        "Mr. Burns": "/assets/burns.png", // Alias posible
-        "Moe Szyslak": "/assets/moe.png",
-        "Seymour Skinner": "/assets/skinner.png",
-        "Principal Skinner": "/assets/skinner.png", // Alias posible
-        "Krusty the Clown": "/assets/krusty.png",
-        "Apu Nahasapeemapetilon": "/assets/apu.png",
-        "Milhouse Van Houten": "/assets/milhouse.png",
-        "Waylon Smithers": "/assets/smithers.png",
-        "Clancy Wiggum": "/assets/wiggum.png",
-        "Chief Wiggum": "/assets/wiggum.png" // Alias posible
-    };
-
     // Mapear al formato que espera la app
     return results.map(item => ({
         character: item.name,
-        // Usar imagen local si existe, sino DiceBear como fallback garantizado
-        image: characterImages[item.name] || `https://api.dicebear.com/9.x/avataaars/svg?seed=${item.name}`, 
+        // Uso de CDN oficial según documentación: https://cdn.thesimpsonsapi.com/500/character/{id}.webp
+        image: `https://cdn.thesimpsonsapi.com/500/character/${item.id}.webp`,
         quote: item.phrases && item.phrases.length > 0 ? item.phrases[Math.floor(Math.random() * item.phrases.length)] : "No quote available.",
         characterDirection: "Right",
         id: item.id.toString(),
@@ -62,15 +39,21 @@ export const getCharacters = async () => {
  * Obtiene lista de episodios de la API.
  */
 export const getEpisodes = async () => {
-  try {
-    const response = await fetch(`${API_URL}/episodes?limit=50`);
-    if (!response.ok) throw new Error("Error fetching episodes");
-    const data = await response.json();
-    return data.results || []; 
-  } catch (error) {
-    console.error("Error in getEpisodes:", error);
-    return [];
-  }
+    try {
+        const response = await fetch(`${API_URL}/episodes?limit=50`);
+        if (!response.ok) throw new Error("Error fetching episodes");
+        const data = await response.json();
+        const results = data.results || [];
+        
+        return results.map(ep => ({
+            ...ep,
+            // Uso de CDN oficial: https://cdn.thesimpsonsapi.com/200/episode/{id}.webp
+            image: `https://cdn.thesimpsonsapi.com/200/episode/${ep.id}.webp`
+        }));
+    } catch (error) {
+        console.error("Error in getEpisodes:", error);
+        return [];
+    }
 };
 
 /**
@@ -85,8 +68,9 @@ export const getLocations = async () => {
         
         return results.map(loc => ({
             ...loc,
-            // Usar placeholder dinámico para ubicaciones ya que las imágenes de la API fallan
-            image: `https://placehold.co/600x400/87CEEB/ffffff?text=${encodeURIComponent(loc.name)}`
+            // Uso de CDN oficial: https://cdn.thesimpsonsapi.com/1280/location/{id}.webp (o 500 para cards)
+            // Usaremos 500 para la vista de lista para optimizar carga
+            image: `https://cdn.thesimpsonsapi.com/500/location/${loc.id}.webp` 
         }));
     } catch (error) {
         console.error("Error in getLocations:", error);

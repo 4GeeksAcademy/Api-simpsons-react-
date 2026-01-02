@@ -23,11 +23,11 @@ export const Episodes = () => {
                 {store.episodes.map(episode => (
                     <div key={episode.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                         <div className="card h-100 shadow-sm border-0 rounded overflow-hidden">
-                             {/* Header visual para episodios */}
-                            <div className="bg-primary text-white p-3 text-center d-flex align-items-center justify-content-center"
-                                 style={{ height: '100px' }}>
-                                <h5 className="font-weight-bold mb-0">Temporada {episode.season}</h5>
-                            </div>
+                             <img src={episode.image} 
+                                 className="card-img-top" 
+                                 alt={episode.name}
+                                 style={{height: '150px', objectFit: 'cover'}}
+                            />
                             <div className="card-body">
                                 <h6 className="card-title font-weight-bold text-truncate" title={episode.name}>{episode.name}</h6> {/* API usa 'name' no 'title' */}
                                 <p className="card-text small text-muted">Episodio {episode.episode_number}</p>
