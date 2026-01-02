@@ -19,20 +19,34 @@ export const getCharacters = async () => {
     // La API devuelve { results: [...] }
     const results = data.results || [];
 
-    // Mapeo de personajes a sus imágenes locales
+    // Mapeo de personajes a sus imágenes locales (incluyendo nuevos assets)
     const characterImages = {
         "Homer Simpson": "/assets/homer.png",
         "Marge Simpson": "/assets/marge.png",
         "Bart Simpson": "/assets/bart.png",
         "Lisa Simpson": "/assets/lisa.png",
-        "Maggie Simpson": "/assets/maggie.png"
+        "Maggie Simpson": "/assets/maggie.png",
+        "Abe Simpson": "/assets/abe.png",
+        "Abraham Simpson": "/assets/abe.png", // Alias posible
+        "Ned Flanders": "/assets/flanders.png",
+        "Montgomery Burns": "/assets/burns.png",
+        "Mr. Burns": "/assets/burns.png", // Alias posible
+        "Moe Szyslak": "/assets/moe.png",
+        "Seymour Skinner": "/assets/skinner.png",
+        "Principal Skinner": "/assets/skinner.png", // Alias posible
+        "Krusty the Clown": "/assets/krusty.png",
+        "Apu Nahasapeemapetilon": "/assets/apu.png",
+        "Milhouse Van Houten": "/assets/milhouse.png",
+        "Waylon Smithers": "/assets/smithers.png",
+        "Clancy Wiggum": "/assets/wiggum.png",
+        "Chief Wiggum": "/assets/wiggum.png" // Alias posible
     };
 
     // Mapear al formato que espera la app
     return results.map(item => ({
         character: item.name,
-        // Usar imagen local si existe, sino generic.png
-        image: characterImages[item.name] || "/assets/generic.png", 
+        // Usar imagen local si existe, sino DiceBear como fallback garantizado
+        image: characterImages[item.name] || `https://api.dicebear.com/9.x/avataaars/svg?seed=${item.name}`, 
         quote: item.phrases && item.phrases.length > 0 ? item.phrases[Math.floor(Math.random() * item.phrases.length)] : "No quote available.",
         characterDirection: "Right",
         id: item.id.toString(),

@@ -22,11 +22,13 @@ export const Home = () => {
       </h1>
       <div className="row">
         {store.characters.length > 0 ? (
-            store.characters.map((char) => (
-                <div key={char.id || char.character} className="col-12 col-md-6 col-lg-3 mb-4 d-flex justify-content-center">
-                    <CharacterCard character={char} />
-                </div>
-            ))
+            <div className="row">
+                {store.characters.map(character => (
+                    <div key={character.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <CharacterCard character={character} />
+                    </div>
+                ))}
+            </div>
         ) : (
              <div className="col-12 text-center">
                 <div className="spinner-border text-primary" role="status">

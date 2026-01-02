@@ -36,7 +36,7 @@ export const CharacterCard = ({ character }) => {
                    <span className="badge badge-pill badge-success border mx-1">Vivo</span>
                 </div>
                 
-                <p className="card-text font-italic">"{character.quote}"</p>
+                <p className="card-text text-truncate" title={character.quote}>"{character.quote}"</p>
 
                 <div className="d-flex justify-content-between mt-auto">
                     <Link to={`/character/${character.id}`} className="btn btn-outline-primary mr-2">

@@ -46,7 +46,7 @@ export const Single = () => {
     <div className="container mt-5">
       <div className="jumbotron bg-white shadow-sm border rounded">
         <div className="row">
-             <div className="col-md-6 text-center">
+             <div className="col-12 col-md-6 text-center mb-4 mb-md-0">
                  <img 
                     src={character.image} 
                     alt={character.character} 
@@ -54,9 +54,9 @@ export const Single = () => {
                     style={{ maxHeight: "400px" }}
                  />
              </div>
-             <div className="col-md-6 d-flex flex-column justify-content-center">
-                 <h1 className="display-4 text-primary">{character.character}</h1>
-                 <p className="lead font-italic">"{character.quote}"</p>
+             <div className="col-12 col-md-6 d-flex flex-column justify-content-center">
+                 <h1 className="display-4 text-primary text-center text-md-left">{character.character}</h1>
+                 <p className="lead font-italic text-center text-md-left">"{character.quote}"</p>
                  <hr className="my-4" />
                  <p><strong>Dirección:</strong> {character.characterDirection}</p>
                  <p><strong>Estado:</strong> Vivo (Asumido)</p>
