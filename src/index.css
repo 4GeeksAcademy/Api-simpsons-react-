@@ -1,0 +1,100 @@
+body {
+  background-color: #f0f8ff; /* AliceBlue usually looks nice and clean, similar to reference */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  border-radius: 15px; /* Rounded corners detailed in reference */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.jumbotron {
+  background-color: white;
+}
+
+/* Ensure buttons are properly spaced */
+.btn {
+  border-radius: 20px;
+}
+
+h1.text-warning {
+  color: #ffde00 !important; /* Simpsons Yellow */
+  -webkit-text-stroke: 1px #000; /* Black outline */
+}
+
+/* Custom generic dark gray badge */
+.badge-status-custom {
+  background-color: #495057 !important; /* Dark Gray */
+  color: white !important;
+}
+
+/* =============================================== */
+/* RESPONSIVE STYLES - Mobile First Approach      */
+/* =============================================== */
+
+/**
+ * Card responsive: asegura que las tarjetas se adapten sin superposición.
+ * El contenedor flex permite alineación uniforme en todos los tamaños.
+ */
+.card-body {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Móvil pequeño: 1 columna, centrado */
+@media (max-width: 575.98px) {
+  .card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .card-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Tablet: 768px - ajuste de padding y tamaño */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .card {
+    max-width: 100%;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-text {
+    font-size: 0.875rem;
+  }
+  
+  /* Botones más compactos en tablet */
+  .card .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Desktop grande: 1024px+ */
+@media (min-width: 992px) {
+  .card {
+    max-width: 100%;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+}
